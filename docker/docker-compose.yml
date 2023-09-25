@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:  
+  csgo-dedicated:
+    image: timche/csgo
+    network_mode: host
+    volumes:
+      - csgo:/home/csgo/server
+
+  csgo-rcon-web:
+    image: itzg/rcon
+    network_mode: host
+    environment:
+      - RWA_PASSWORD=changeme
+      - RWA_GAME=csgo
+      - RWA_RCON_HOST=csgo-dedicated
+      - RWA_RCON_PORT=27015
+      - RWA_RCON_PASSWORD=minio-dev-evil
+
+volumes:
+  csgo:
